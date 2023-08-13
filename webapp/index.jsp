@@ -65,7 +65,7 @@
                 <li class="active"><a href="index.jsp">Posts</a></li>
                 <c:if test="${not empty sessionScope.user}">
                         <li><a href="user/logout" role="button">로그아웃</a></li>
-                        <li><a href="#" role="button">개인정보수정</a></li>
+                        <li><a href="user/update" role="button">개인정보수정</a></li>
                 </c:if>
                     <!--
                     <li><a href="#loginModal" role="button" data-toggle="modal">로그인</a></li>
