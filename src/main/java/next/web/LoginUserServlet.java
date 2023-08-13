@@ -8,10 +8,7 @@ import org.slf4j.LoggerFactory;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.*;
 import java.io.IOException;
 
 @WebServlet("/user/login")
@@ -23,13 +20,15 @@ public class LoginUserServlet extends HttpServlet {
     protected void doPost(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException, IOException {
         if (isValidUser(req.getParameter("userId"), req.getParameter("password"))) {
             resp.addCookie(new Cookie("logined", "true"));
+            HttpSession session = req.getSession();
+            session.setAttribute("user", DataBase.findUserById(req.getParameter("userId")));
             log.debug("{} is login!", req.getParameter("userId"));
-            resp.sendRedirect("/index.html");
+            resp.sendRedirect("/");
             return;
         }
         resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
         resp.addCookie(new Cookie("logined", "false"));
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/user/login_failed.html");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/user/login_failed.jsp");
         dispatcher.forward(req, resp);
     }
 
