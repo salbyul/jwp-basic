@@ -64,4 +64,11 @@ public class AnswerDao {
 
         return jdbcTemplate.query(sql, rm, questionId);
     }
+
+    public void delete(long answerId) {
+        JdbcTemplate template = new JdbcTemplate();
+        String sql = "DELETE FROM ANSWERS WHERE answerId = ?";
+        template.update(sql, pstmt ->
+                pstmt.setLong(1, answerId));
+    }
 }
