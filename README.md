@@ -10,7 +10,15 @@
 * DispatcherServlet의 URLPatterns가 '/'이므로 모든 요청을 DispatcherServlet이 수행한다.
 
 #### 2. Tomcat 서버를 시작한 후 http://localhost:8080으로 접근시 호출 순서 및 흐름을 설명하라.
-* 
+* 클라이언트가 http://localhost:8080 으로 요청을 하게 되면 WebSocket과 연결이 되며 새로운 쓰레드가 생성된다.
+* 해당 WebSocket의 InputStream 으로 Http Request 프로토콜이 오게 되며 이를 분석해 HttpServletReqeust 객체를 생성한다.
+* 그 후 요청 URI에 맞는 Servlet이 요청을 수행하게 된다.
+* 현재 프로젝트에서는 DispatcherServlet이 모든 요청을 수행하게 된다.
+* DispatcherServlet이 해당 URI('/')와 매핑된 HomeController 인스턴스의 execute 메서드를 호출한다.
+* 그 후 DispatcherServlet으로 돌아오게 되면 execute 메서드의 반환값인 ModelAndView 를 받고 View의 render 메서드를 호출하여 응답을 하게 된다.
+* 응답을 하는 과정은 HttpServletResponse를 분석해 WebSocket의 OutputStream 으로 Http Response 프로토콜을 전송하게 된다.
+* 현재 프로젝트에서는 클라이언트가 이를 받게 되면 Html 파일이 Response body로 전송되게 되며 해당 Html이 필요로 하는 CSS, Javascript 파일을 재요청하게 된다.
+* 이하 같은 과정을 거쳐 응답을 하게 된다.
 
 #### 7. next.web.qna package의 ShowController는 멀티 쓰레드 상황에서 문제가 발생하는 이유에 대해 설명하라.
 * 
