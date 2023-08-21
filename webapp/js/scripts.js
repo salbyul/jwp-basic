@@ -17,9 +17,12 @@ function addAnswer(e) {
 }
 
 function onSuccess(json, status){
+  const elementById = document.getElementById("countsOfAnswer");
+  elementById.innerText = (elementById.innerText * 1) + 1;
   var answer = json.answer;
   var answerTemplate = $("#answerTemplate").html();
   var template = answerTemplate.format(answer.writer, new Date(answer.createdDate), answer.contents, answer.answerId, answer.answerId);
+
   $(".qna-comment-slipp-articles").prepend(template);
 }
 

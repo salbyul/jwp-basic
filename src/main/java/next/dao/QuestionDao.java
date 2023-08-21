@@ -16,8 +16,8 @@ import next.model.Question;
 public class QuestionDao {
     public Question insert(Question question) {
         JdbcTemplate jdbcTemplate = new JdbcTemplate();
-        String sql = "INSERT INTO QUESTIONS " + 
-                "(writer, title, contents, createdDate) " + 
+        String sql = "INSERT INTO QUESTIONS " +
+                "(writer, title, contents, createdDate) " +
                 " VALUES (?, ?, ?, ?)";
         PreparedStatementCreator psc = new PreparedStatementCreator() {
             @Override
@@ -35,7 +35,7 @@ public class QuestionDao {
         jdbcTemplate.update(psc, keyHolder);
         return findById(keyHolder.getId());
     }
-    
+
     public List<Question> findAll() {
         JdbcTemplate jdbcTemplate = new JdbcTemplate();
         String sql = "SELECT questionId, writer, title, createdDate, countOfAnswer FROM QUESTIONS "
@@ -67,5 +67,12 @@ public class QuestionDao {
         };
 
         return jdbcTemplate.queryForObject(sql, rm, questionId);
+    }
+
+    public void addCountsOfAnswerById(final long questionId) {
+        JdbcTemplate template = new JdbcTemplate();
+        String sql = "UPDATE QUESTIONS SET countOfAnswer = countOfAnswer + 1 WHERE questionId = ?";
+        template.update(sql, pstmt ->
+                pstmt.setLong(1, questionId));
     }
 }
