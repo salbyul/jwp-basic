@@ -13,14 +13,14 @@ import core.mvc.AbstractController;
 import core.mvc.ModelAndView;
 
 public class ShowController extends AbstractController {
-    private QuestionDao questionDao = new QuestionDao();
-    private AnswerDao answerDao = new AnswerDao();
+    private final QuestionDao questionDao = new QuestionDao();
+    private final AnswerDao answerDao = new AnswerDao();
     private Question question;
     private List<Answer> answers;
 
     @Override
     public ModelAndView execute(HttpServletRequest req, HttpServletResponse response) throws Exception {
-        Long questionId = Long.parseLong(req.getParameter("questionId"));
+        long questionId = Long.parseLong(req.getParameter("questionId"));
 
         question = questionDao.findById(questionId);
         answers = answerDao.findAllByQuestionId(questionId);
