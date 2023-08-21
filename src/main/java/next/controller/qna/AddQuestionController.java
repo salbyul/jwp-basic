@@ -17,7 +17,6 @@ public class AddQuestionController extends AbstractController {
 
     @Override
     public ModelAndView execute(final HttpServletRequest request, final HttpServletResponse response) throws Exception {
-        request.setCharacterEncoding("UTF-8");
         Question question = new Question(request.getParameter("writer"), request.getParameter("title"), request.getParameter("contents"));
 
         questionDao.insert(question);
