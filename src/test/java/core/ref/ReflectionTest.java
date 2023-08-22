@@ -1,5 +1,6 @@
 package core.ref;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,7 +47,13 @@ public class ReflectionTest {
     @Test
     public void newInstanceWithConstructorArgs() {
         Class<User> clazz = User.class;
-        logger.debug(clazz.getName());
+        try {
+            Constructor<User> declaredConstructor = clazz.getDeclaredConstructor(String.class, String.class, String.class, String.class);
+            User user = declaredConstructor.newInstance("첫번 째 인자", "두번 째 인자", "세번 째 인자", "네번 째 인자");
+            logger.debug("user: {}", user);
+        } catch (Exception e) {
+            Assert.fail();
+        }
     }
     
     @Test
