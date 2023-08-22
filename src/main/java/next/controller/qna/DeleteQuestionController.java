@@ -21,16 +21,13 @@ public class DeleteQuestionController extends AbstractController {
     @Override
     public ModelAndView execute(final HttpServletRequest request, final HttpServletResponse response) throws Exception {
         long questionId = Long.parseLong(request.getParameter("questionId"));
-        if (canDelete(questionId)) {
+        if (canDelete(questionId, new QuestionDao(), new AnswerDao())) {
             return jspView("redirect:/");
         }
         throw new IllegalAccessException("삭제할 수 없습니다.");
     }
 
-    public static boolean canDelete(final long questionId) {
-        QuestionDao questionDao = new QuestionDao();
-        AnswerDao answerDao = new AnswerDao();
-
+    public static boolean canDelete(final long questionId, final QuestionDao questionDao, final AnswerDao answerDao) {
         Question question = questionDao.findById(questionId);
         if (question == null) {
             return false;
