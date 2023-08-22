@@ -39,3 +39,28 @@ String.prototype.format = function() {
         ;
   });
 };
+
+$(".article-util button[type=submit]").click(deleteAnswer);
+
+async function deleteAnswer(e) {
+  e.preventDefault();
+  const answerId = e.currentTarget.parentNode[0].value;
+
+  const result = await $.ajax({
+    type : 'post',
+    url : '/api/qna/deleteAnswer',
+    data : {answerId: answerId},
+    dataType : 'json',
+    error: onError,
+    success : onDeleteSuccess,
+  });
+  console.log(result);
+  if (result.result.status === true) {
+    const willRemoveNode = e.currentTarget.parentNode.parentNode.parentNode.parentNode.parentNode;
+    willRemoveNode.remove();
+  }
+}
+
+function onDeleteSuccess(json, status) {
+  alert('삭제되었습니다.');
+}
