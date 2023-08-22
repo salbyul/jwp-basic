@@ -2,6 +2,7 @@ package next.controller.qna;
 
 import core.mvc.AbstractController;
 import core.mvc.ModelAndView;
+import next.controller.Controller;
 import next.dao.QuestionDao;
 import next.model.Question;
 import org.slf4j.Logger;
@@ -10,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+@Controller(urlPatterns = "/qna/create")
 public class AddQuestionController extends AbstractController {
 
     private static final Logger log = LoggerFactory.getLogger(AddQuestionController.class);

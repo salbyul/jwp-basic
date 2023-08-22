@@ -3,12 +3,14 @@ package next.controller.qna;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import next.controller.Controller;
 import next.dao.AnswerDao;
 import next.model.Result;
 import core.jdbc.DataAccessException;
 import core.mvc.AbstractController;
 import core.mvc.ModelAndView;
 
+@Controller(urlPatterns = "/api/qna/deleteAnswer")
 public class DeleteAnswerController extends AbstractController {
     private AnswerDao answerDao = new AnswerDao();
 

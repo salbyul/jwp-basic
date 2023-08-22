@@ -2,12 +2,14 @@ package next.controller.qna;
 
 import core.mvc.AbstractController;
 import core.mvc.ModelAndView;
+import next.controller.Controller;
 import next.controller.UserSessionUtils;
 import next.model.User;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+@Controller(urlPatterns = "/qna/form")
 public class QuestionFormController extends AbstractController {
 
     @Override

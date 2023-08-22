@@ -2,6 +2,7 @@ package next.controller.qna;
 
 import core.mvc.AbstractController;
 import core.mvc.ModelAndView;
+import next.controller.Controller;
 import next.dao.AnswerDao;
 import next.dao.QuestionDao;
 import next.model.Result;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import static next.controller.qna.DeleteQuestionController.*;
 
+@Controller(urlPatterns = "/api/qna/delete")
 public class ApiDeleteQuestionController extends AbstractController {
 
     @Override

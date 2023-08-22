@@ -2,6 +2,7 @@ package next.controller.qna;
 
 import core.mvc.AbstractController;
 import core.mvc.ModelAndView;
+import next.controller.Controller;
 import next.dao.AnswerDao;
 import next.dao.QuestionDao;
 import next.model.Question;
@@ -11,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+@Controller(urlPatterns = "/qna/update")
 public class UpdateQuestionController extends AbstractController {
 
     private final QuestionDao questionDao = new QuestionDao();

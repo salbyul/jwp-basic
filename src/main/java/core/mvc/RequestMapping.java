@@ -43,6 +43,15 @@ public class RequestMapping {
         mappings.put("/api/qna/delete", new ApiDeleteQuestionController());
 
         logger.info("Initialized Request Mapping!");
+
+        Package[] packages = Package.getPackages();
+        Class<JspView> jspViewClass = JspView.class;
+        for (Package aPackage : packages) {
+            if (aPackage.getName().startsWith("core") || aPackage.getName().startsWith("next")) {
+//                logger.debug("class name: {}", aPackage.getImplementationTitle());
+                logger.debug("package name: {}", aPackage.getName());
+            }
+        }
     }
 
     public Controller findController(String url) {

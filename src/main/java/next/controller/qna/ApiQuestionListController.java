@@ -2,11 +2,13 @@ package next.controller.qna;
 
 import core.mvc.AbstractController;
 import core.mvc.ModelAndView;
+import next.controller.Controller;
 import next.dao.QuestionDao;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+@Controller(urlPatterns = "/api/qna/list")
 public class ApiQuestionListController extends AbstractController {
 
     private final QuestionDao questionDao = new QuestionDao();

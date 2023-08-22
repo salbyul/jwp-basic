@@ -4,11 +4,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import next.controller.Controller;
 import next.dao.UserDao;
 import next.model.User;
 import core.mvc.AbstractController;
 import core.mvc.ModelAndView;
 
+@Controller(urlPatterns = "/users/login")
 public class LoginController extends AbstractController {
     @Override
     public ModelAndView execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
