@@ -59,6 +59,23 @@ public class ReflectionTest {
     @Test
     public void privateFieldAccess() {
         Class<Student> clazz = Student.class;
-        logger.debug(clazz.getName());
+        try {
+            Constructor<Student> constructor = clazz.getConstructor();
+            Field[] declaredFields = clazz.getDeclaredFields();
+            Student student = constructor.newInstance();
+            for (Field declaredField : declaredFields) {
+                logger.debug("field: [{}] [{}]", declaredField.getName(), declaredField.getType());
+                declaredField.setAccessible(true);
+                if (declaredField.getName().equals("name")) {
+                    declaredField.set(student, "이름입니다.");
+                }
+                if (declaredField.getName().equals("age")) {
+                    declaredField.set(student, 25);
+                }
+            }
+            logger.debug("student: [name: {}] [age: {}]", student.getName(), student.getAge());
+        } catch (Exception e) {
+            Assert.fail();
+        }
     }
 }
