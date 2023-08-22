@@ -75,4 +75,14 @@ public class QuestionDao {
         template.update(sql, pstmt ->
                 pstmt.setLong(1, questionId));
     }
+
+    public void update(final Question question) {
+        JdbcTemplate template = new JdbcTemplate();
+        String sql = "UPDATE QUESTIONS SET title = ?, contents = ? WHERE questionId = ?";
+        template.update(sql, pstmt -> {
+            pstmt.setString(1, question.getTitle());
+            pstmt.setString(2, question.getContents());
+            pstmt.setLong(3, question.getQuestionId());
+        });
+    }
 }
