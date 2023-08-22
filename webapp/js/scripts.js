@@ -40,7 +40,7 @@ String.prototype.format = function() {
   });
 };
 
-$(".article-util button[type=submit]").click(deleteAnswer);
+$("#delete-answer").click(deleteAnswer);
 
 async function deleteAnswer(e) {
   e.preventDefault();

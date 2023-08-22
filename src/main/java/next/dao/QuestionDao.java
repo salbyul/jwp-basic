@@ -75,4 +75,9 @@ public class QuestionDao {
             pstmt.setLong(3, question.getQuestionId());
         });
     }
+
+    public void delete(final Long questionId) {
+        String sql = "DELETE FROM QUESTIONS WHERE questionId = ?";
+        template.update(sql, questionId);
+    }
 }
