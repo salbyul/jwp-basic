@@ -5,11 +5,13 @@ import org.junit.Test;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 
+import java.lang.reflect.InvocationTargetException;
+
 public class AnnotationHandlerMappingTest {
     private AnnotationHandlerMapping handlerMapping;
 
     @Before
-    public void setup() {
+    public void setup() throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         handlerMapping = new AnnotationHandlerMapping("core.nmvc");
         handlerMapping.initialize();
     }

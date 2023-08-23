@@ -1,6 +1,7 @@
 package core.nmvc;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -32,7 +33,11 @@ public class DispatcherServlet extends HttpServlet {
         LegacyHandlerMapping lhm = new LegacyHandlerMapping();
         lhm.initMapping();
         AnnotationHandlerMapping ahm = new AnnotationHandlerMapping("next.controller");
-        ahm.initialize();
+        try {
+            ahm.initialize();
+        } catch (InvocationTargetException | NoSuchMethodException | InstantiationException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
 
         mappings.add(lhm);
         mappings.add(ahm);
@@ -58,7 +63,7 @@ public class DispatcherServlet extends HttpServlet {
                 view.render(mav.getModel(), req, resp);
             }
         } catch (Throwable e) {
-            logger.error("Exception : {}", e);
+            logger.error("Exception : {}", e.getMessage());
             throw new ServletException(e.getMessage());
         }
     }
