@@ -1,6 +1,7 @@
 package core.web.mvc;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -28,7 +29,11 @@ public class DispatcherServlet extends HttpServlet {
     @Override
     public void init() throws ServletException {
         AnnotationHandlerMapping ahm = new AnnotationHandlerMapping("next");
-        ahm.initialize();
+        try {
+            ahm.initialize();
+        } catch (InvocationTargetException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
         mappings.add(ahm);
         handlerAdapters.add(new HandlerExecutionHandlerAdapter());
     }

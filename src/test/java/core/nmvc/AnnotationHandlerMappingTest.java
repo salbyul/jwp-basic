@@ -8,11 +8,13 @@ import org.springframework.mock.web.MockHttpServletResponse;
 import core.web.mvc.AnnotationHandlerMapping;
 import core.web.mvc.HandlerExecution;
 
+import java.lang.reflect.InvocationTargetException;
+
 public class AnnotationHandlerMappingTest {
     private AnnotationHandlerMapping handlerMapping;
 
     @Before
-    public void setup() {
+    public void setup() throws InvocationTargetException, IllegalAccessException {
         handlerMapping = new AnnotationHandlerMapping("core.nmvc");
         handlerMapping.initialize();
     }

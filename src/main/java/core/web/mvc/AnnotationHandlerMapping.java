@@ -1,5 +1,6 @@
 package core.web.mvc;
 
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Map;
 import java.util.Set;
@@ -29,7 +30,7 @@ public class AnnotationHandlerMapping implements HandlerMapping {
         this.basePackage = basePackage;
     }
 
-    public void initialize() {
+    public void initialize() throws InvocationTargetException, IllegalAccessException {
         BeanScanner scanner = new BeanScanner(basePackage);
         BeanFactory beanFactory = new BeanFactory(scanner.scan());
         beanFactory.initialize();

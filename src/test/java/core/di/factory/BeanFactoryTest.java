@@ -2,9 +2,11 @@ package core.di.factory;
 
 import static org.junit.Assert.assertNotNull;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 import java.util.Set;
 
+import core.di.factory.example.MyUserService;
 import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -19,7 +21,7 @@ public class BeanFactoryTest {
     private BeanFactory beanFactory;
 
     @Before
-    public void setup() {
+    public void setup() throws InvocationTargetException, IllegalAccessException {
         BeanScanner scanner = new BeanScanner("core.di.factory.example");
         Set<Class<?>> preInstanticateClazz = scanner.scan();
         beanFactory = new BeanFactory(preInstanticateClazz);
@@ -45,5 +47,15 @@ public class BeanFactoryTest {
         for (Class<?> clazz : keys) {
             log.debug("Bean : {}", clazz);
         }
+    }
+
+    @Test
+    public void diByField() {
+        MyUserService userService = beanFactory.getBean(MyUserService.class);
+
+        assertNotNull(userService);
+        assertNotNull(userService.getQuestionRepository());
+        assertNotNull(userService.getUserRepository());
+
     }
 }
