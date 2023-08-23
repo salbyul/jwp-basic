@@ -25,7 +25,9 @@ import next.controller.user.ProfileController;
 import next.controller.user.UpdateFormUserController;
 import next.controller.user.UpdateUserController;
 
-public class RequestMapping {
+import javax.servlet.http.HttpServletRequest;
+
+public class LegacyHandlerMapping implements HandlerMapping {
     private static final Logger logger = LoggerFactory.getLogger(DispatcherServlet.class);
     private Map<String, Controller> mappings = new HashMap<>();
 
@@ -60,5 +62,11 @@ public class RequestMapping {
 
     void put(String url, Controller controller) {
         mappings.put(url, controller);
+    }
+
+    @Override
+    public Controller getHandler(final HttpServletRequest request) {
+        String requestURI = request.getRequestURI();
+        return findController(requestURI);
     }
 }
